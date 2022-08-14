@@ -11,9 +11,14 @@ pipeline {
 
             }
         }
-        stage('Execute') {
+        stage('Execute issuetracker tests') {
             steps{
                 bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m robot.run --pythonpath C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages -d robot/results -i issuetracker  robot/testfiles/issuetracker.robot"""
+                }
+        }
+        stage('Execute mock tests tests') {
+            steps{
+                bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m robot.run --pythonpath C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages -d robot/results -i issuetracker  -v api_key_postman:${POSTMAN_API_KEY} robot/testfiles/mock_server_tests_postman.robot"""
                 }
         }
     }
