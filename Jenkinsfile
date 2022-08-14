@@ -14,12 +14,12 @@ pipeline {
         }
         stage('Execute issuetracker tests') {
             steps{
-                bat """${PYTHON_PATH} -m robot.run --pythonpath ${PYTHON_SITE_PACKAGES} -d robot/results -i issuetracker  robot/testfiles/issuetracker.robot"""
+                bat """${PYTHON_PATH} -m robot.run --pythonpath ${PYTHON_SITE_PACKAGES} -d robot/results_issuetracker -i issuetracker  robot/testfiles/issuetracker.robot"""
                 }
         }
         stage('Execute mock tests tests') {
             steps{
-                bat """${PYTHON_PATH} -m robot.run --pythonpath ${PYTHON_SITE_PACKAGES} -d robot/results -v api_key_postman:%POSTMAN_API_KEY% robot/testfiles/postman_mock_server_tests.robot"""
+                bat """${PYTHON_PATH} -m robot.run --pythonpath ${PYTHON_SITE_PACKAGES} -d robot/results_mocking -v api_key_postman:%POSTMAN_API_KEY% robot/testfiles/postman_mock_server_tests.robot"""
                 }
         }
     }
