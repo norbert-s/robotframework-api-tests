@@ -5,11 +5,15 @@ pipeline {
         ROBOT_PATH = ${ROBOT_PATH}
     }
     stages {
-
+        stage('Build') {
+            steps{
+                 bat "python --version"
+            }
+        }
         stage('Execute') {
             steps{
                 bat """${ROBOT_PATH}robot -d robot/results -i issuetracker  robot/testfiles/issuetracker.robot"""
-            }
+                }
         }
     }
 }
