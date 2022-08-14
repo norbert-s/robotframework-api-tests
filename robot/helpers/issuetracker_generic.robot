@@ -28,7 +28,7 @@ Post issue
     ${dictionary}    Generate faker data for issuetracker
     #${write_out_file_name}    Set Variable    ${TEST NAME}.json
     #Dump JSON To File    ..\\results\\${write_out_file_name}    ${dictionary}
-    Log To Console    ${dictionary}
+    log    ${dictionary}
     ${resp}=     POST     ${spring_boot_issue_tracker}/api/issues    json=${dictionary}    headers=${headers}
     ${resp_body}    Set Variable    ${resp.json()}
     Response should contain the values    ${resp_body}    ${dictionary}
@@ -37,8 +37,8 @@ Delete last entry in db
     ${all_issues}    Get all issues returned in dictionary
     ${length}    Get Length     ${all_issues}
     ${length}    Convert To Integer    ${length}
-    Log To Console    ${length}
-    #Log To Console    ${all_issues[${length-1}]['id']}
+    log    ${length}
+    #log    ${all_issues[${length-1}]['id']}
     ${id_of_last_element}    Set Variable            ${all_issues[${length-1}]['id']}
     ${resp_body}    Delete issue    ${id_of_last_element}
     #Should Contain    ${resp_body}    ${on_delete_response_issue_tracker} ${id_of_last_element}
@@ -54,7 +54,7 @@ Delete issue
     ${resp_body}    Set Variable    ${resp.text}
     #${write_out_file_name}    Set Variable    ${TEST NAME}.text
     #Create File    ..\\result\\${write_out_file_name}    ${resp_body}
-    Log To Console    ${resp_body}
+    log    ${resp_body}
     #Response should contain the values    ${resp_body}    ${id_to_delete}
     Return From Keyword    ${resp_body}
 
@@ -67,11 +67,11 @@ Get all issues returned in dictionary
 
 # Get all issues printed out
 #     FOR      ${item}   IN    @{resp_issues}
-#         Log To Console    ${item['id']}
-#         Log To Console    ${item['description']}
-#         Log To Console    ${item['assigneeName']}
-#         Log To Console    ${item['status']}
-#         Log To Console    'next item'
+#         log    ${item['id']}
+#         log    ${item['description']}
+#         log    ${item['assigneeName']}
+#         log    ${item['status']}
+#         log    'next item'
 #     END
 
 #better from variable file
@@ -86,7 +86,7 @@ Generate faker data for issuetracker
     set to dictionary    ${dictionary}   assigneeName=${name}
     set to dictionary    ${dictionary}    description=${description}
     set to dictionary    ${dictionary}    status=${status}
-    Log To Console    ${dictionary['title']}
+    log    ${dictionary['title']}
     Return From Keyword     ${dictionary}
 
 Response should contain the values

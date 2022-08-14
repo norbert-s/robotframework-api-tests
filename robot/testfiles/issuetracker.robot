@@ -25,14 +25,14 @@ ${id_to_be_deleted}
 #     Create Session    session    https://spring-boot-issue-tracker.herokuapp.com/api/issues
 #     ${resp_issues}=   GET On Session      session      /      expected_status=200
 #     ${resp_issues}    Set Variable    ${resp_issues.json()}
-#     Log To Console    printing different values from response
-#     Log To Console    ${resp_issues[0]['title']}
+#     log    printing different values from response
+#     log    ${resp_issues[0]['title']}
 #     FOR      ${item}   IN    @{resp_issues}
-#         Log To Console    ${item['id']}
-#         Log To Console    ${item['description']}
-#         Log To Console    ${item['assigneeName']}
-#         Log To Console    ${item['status']}
-#         Log To Console    'next item'
+#         log    ${item['id']}
+#         log    ${item['description']}
+#         log    ${item['assigneeName']}
+#         log    ${item['status']}
+#         log    'next item'
 #     END
 
 # Create issue by modifying json from file and then post
@@ -42,10 +42,10 @@ ${id_to_be_deleted}
 #     ${dictionary}    Convert To Dictionary    ${body}
 #     ${created_number}    Set Variable    
 #     set to dictionary    ${dictionary}    assigneeName=the new value
-#     Log To Console    ${body}
+#     log    ${body}
 #     ${resp}=     POST     ${spring_boot_issue_tracker}/api/issues    json=${dictionary}    headers=${headers}
 #     ${resp_body}    Set Variable    ${resp.json()}
-#     Log To Console    ${resp_body}
+#     log    ${resp_body}
     
 # POST issue by using faker
 #     [tags]  create_issue
@@ -54,7 +54,7 @@ ${id_to_be_deleted}
 #     ${dictionary}    issuetracker_generic.Generate faker data for issuetracker
 #     ${write_out_file_name}    Set Variable    ${TEST NAME}.json
 #     Dump JSON To File    ..\\results\\${write_out_file_name}    ${dictionary}
-#     Log To Console    ${dictionary}
+#     log    ${dictionary}
 #     ${resp}=     POST     ${spring_boot_issue_tracker}/api/issues    json=${dictionary}    headers=${headers}
 #     ${resp_body}    Set Variable    ${resp.json()}
 #     issuetracker_generic.Response should contain the values    ${resp_body}    ${dictionary}
@@ -64,11 +64,11 @@ ${id_to_be_deleted}
 # Get issues returned
 #     ${all_issues}    issuetracker_generic.Get all issues returned in dictionary
 #     FOR      ${item}   IN    @{all_issues}
-#         Log To Console    ${item['id']}
-#         Log To Console    ${item['description']}
-#         Log To Console    ${item['assigneeName']}
-#         Log To Console    ${item['status']}
-#         Log To Console    'next item'
+#         log    ${item['id']}
+#         log    ${item['description']}
+#         log    ${item['assigneeName']}
+#         log    ${item['status']}
+#         log    'next item'
 #     END
 
  Delete by id
@@ -88,7 +88,7 @@ Delete the last entry in the db
 Get all issues
     [Tags]    print_all_issues  issuetracker
     ${dict}    issuetracker_generic.Get all issues returned in dictionary
-    Log To Console    ${dict}
+    log    ${dict}
 
 
 

@@ -20,9 +20,9 @@ BearerAuth
     ${resp_body}    Set Variable    ${resp.json()}
     Log     ${resp_body}
     ${workspaces}     Set Variable    ${resp_body['workspaces'][0]['id']}
-    Log To Console    ${workspaces}
-    Log To Console    ${resp_body['workspaces'][1]['id']}
-    Log To Console    ${resp_body['workspaces'][1]['name']}
+    Log    ${workspaces}
+    Log     ${resp_body['workspaces'][1]['id']}
+    Log     ${resp_body['workspaces'][1]['name']}
 
 mock example 1
     [tags]  simple_two
@@ -30,67 +30,67 @@ mock example 1
     #Create Session    mysession    ${get_mock_server}    headers=${headers}
     ${resp}=     GET        ${get_mock_server}/two         headers=${headers}  
     ${resp_body}    Set Variable    ${resp.json()}
-    Log To Console    " "
-    Log To Console    ${resp_body['data']}
-    Log To Console    ${resp_body['messages']}
-    Log To Console    ${resp_body['success']}
+    Log    " "
+    Log    ${resp_body['data']}
+    Log    ${resp_body['messages']}
+    Log    ${resp_body['success']}
 
 mock example 1 more nested
     [tags]  simple_two
     ${headers}      Create Dictionary             Content-type=application/json    headerName=value2    x-mock-match-request-headers=headerName
     ${resp}=     GET        ${get_mock_server}/two         headers=${headers}  
     ${resp_body}    Set Variable    ${resp.json()}
-    Log To Console    " "
-    Log To Console    ${resp_body['data']}
+    log    " "
+    log    ${resp_body['data']}
     FOR      ${item}   IN    @{resp_body['data']}
-        Log To Console    ${item['mainId']}
-        Log To Console    ${item['firstName']}
-        Log To Console    ${item['lastName']}
-        Log To Console    'next item'
+        log    ${item['mainId']}
+        log    ${item['firstName']}
+        log    ${item['lastName']}
+        log    'next item'
     END
-    Log To Console    ${resp_body['messages']}
-    Log To Console    ${resp_body['success']}
+    log    ${resp_body['messages']}
+    log    ${resp_body['success']}
 mock example 1 nested nested
     [tags]  simple_two
     ${headers}      Create Dictionary            Content-type=application/json    headerName=value2    x-mock-match-request-headers=headerName
     ${resp}=     GET        ${get_mock_server}/two         headers=${headers}  
     ${resp_body}    Set Variable    ${resp.json()}
-    Log To Console    " "
+    log    " "
     FOR      ${item}   IN    @{resp_body['data']}
-        Log To Console    ${item['mainId']}
-        Log To Console    ${item['firstName']}
-        Log To Console    ${item['lastName']}
+        log    ${item['mainId']}
+        log    ${item['firstName']}
+        log    ${item['lastName']}
         FOR      ${item_nested}   IN    @{item['categories']}
-            Log To Console    ${item_nested['categoryID']}
-            Log To Console    ${item_nested['categoryName']}
+            log    ${item_nested['categoryID']}
+            log    ${item_nested['categoryName']}
 
         END
-        Log To Console    'next item'
+        log    'next item'
     END
-    Log To Console    ${resp_body['messages']}
-    Log To Console    ${resp_body['success']}
+    log    ${resp_body['messages']}
+    log    ${resp_body['success']}
 
 mock example 1 get from dictionary
     [tags]  simple_two
     ${headers}      Create Dictionary              Content-type=application/json    headerName=value2    x-mock-match-request-headers=headerName
     ${resp}=     GET        ${get_mock_server}/two         headers=${headers}  
     ${resp_body}    Set Variable    ${resp.json()}
-    Log To Console    ${resp_body}
-    Log To Console    ${resp_body['data']}
+    log    ${resp_body}
+    log    ${resp_body['data']}
     ${content_type_header}    Get From Dictionary    ${resp.headers}    Content-Type
     Should Be Equal    ${content_type_header}    application/json; charset=utf-8
-    Log To Console    ${content_type_header}
+    log    ${content_type_header}
 
 mock example 1 convert to string
     [tags]  simple_two
     ${headers}      Create Dictionary             Content-type=application/json    headerName=value2    x-mock-match-request-headers=headerName
     ${resp}=     GET        ${get_mock_server}/two         headers=${headers}  
     ${resp_body}    Set Variable    ${resp.json()}
-    Log To Console    ${resp_body}
-    Log To Console    ${resp_body}
+    log    ${resp_body}
+    log    ${resp_body}
     ${content_type_header}    Get From Dictionary    ${resp.headers}    Content-Type
     Should Be Equal    ${content_type_header}    application/json; charset=utf-8
-    Log To Console    ${content_type_header}
+    log    ${content_type_header}
 
 
 
