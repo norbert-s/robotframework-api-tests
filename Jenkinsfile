@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment{
         POSTMAN_API_KEY = credentials('POSTMAN_API_KEY')
-        PYTHON_PATH = ${PYTHON_PATH}
-        PYTHON_SITE_PACKAGES = ${PYTHON_SITE_PACKAGES}
+        PYTHON_PATH = "${PYTHON_PATH}"
+        PYTHON_SITE_PACKAGES = "${PYTHON_SITE_PACKAGES}"
     }
     stages {
         stage('Build') {
