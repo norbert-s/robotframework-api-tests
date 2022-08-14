@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps{
-                 bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310robot\\python --version"""
+                 bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\python --version"""
                  bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\robot\\run --version"""
 
 
@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Execute') {
             steps{
-                bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310robot\\python.exe -m robot.run C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\robot -d robot/results -i issuetracker  robot/testfiles/issuetracker.robot"""
+                bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m robot.run C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\robot -d robot/results -i issuetracker  robot/testfiles/issuetracker.robot"""
                 }
         }
     }
