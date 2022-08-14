@@ -2,7 +2,8 @@ pipeline {
     agent any
     environment{
         POSTMAN_API_KEY = credentials('POSTMAN_API_KEY')
-        //ROBOT_PATH = ${ROBOT_PATH}
+        PYTHON_PATH = ${PYTHON_PATH}
+        PYTHON_SITE_PACKAGES = ${PYTHON_SITE_PACKAGES}
     }
     stages {
         stage('Build') {
@@ -13,13 +14,18 @@ pipeline {
         }
         stage('Execute issuetracker tests') {
             steps{
-                bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m robot.run --pythonpath C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages -d robot/results -i issuetracker  robot/testfiles/issuetracker.robot"""
+                bat """${PYTHON_PATH} -m robot.run --pythonpath ${PYTHON_SITE_PACKAGES} -d robot/results -i issuetracker  robot/testfiles/issuetracker.robot"""
                 }
         }
         stage('Execute mock tests tests') {
             steps{
-                bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m robot.run --pythonpath C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages -d robot/results -v api_key_postman:%POSTMAN_API_KEY% robot/testfiles/postman_mock_server_tests.robot"""
+                bat """${PYTHON_PATH} -m robot.run --pythonpath ${PYTHON_SITE_PACKAGES} -d robot/results -v api_key_postman:%POSTMAN_API_KEY% robot/testfiles/postman_mock_server_tests.robot"""
                 }
+        }
+    }
+    post {
+        always {
+            junit 'build/reports/**/*.xml'
         }
     }
 }
