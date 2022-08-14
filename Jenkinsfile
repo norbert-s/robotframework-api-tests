@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Execute issuetracker tests') {
             steps{
-                bat """${PYTHON_PATH} -m robot.run --pythonpath ${PYTHON_SITE_PACKAGES} -d robot/results_issuetracker -i issuetracker  robot/testfiles/issuetracker.robot"""
+                bat """${PYTHON_PATH} -m robot.run --pythonpath ${PYTHON_SITE_PACKAGES} -d robot/results_issuetracker -i issuetracker -i delete_last_entry robot/testfiles/issuetracker.robot"""
                 }
         }
         stage('Execute mock tests tests') {
