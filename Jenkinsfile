@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Execute') {
             steps{
-                bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m robot.run C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages -d robot/results -i issuetracker  robot/testfiles/issuetracker.robot"""
+                bat """C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m robot.run --pythonpath C:\\Users\\norbert.susztek\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages -d robot/results -i issuetracker  robot/testfiles/issuetracker.robot"""
                 }
         }
     }
